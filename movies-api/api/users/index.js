@@ -8,6 +8,14 @@ router.get('/', (req, res, next) => {
     User.find().then(users =>  res.status(200).json(users)).catch(next);
 });
 
+//get user favorites
+router.get('/:userName/favourites', (req, res, next) => {
+  const user = req.params.userName;
+  User.find( {username: user}).then(
+      user => res.status(201).send(user.favourites)
+  ).catch(next);
+});
+
 // register
 router.post('/', (req, res ,next) => {
     User.create(req.body).then(user => res.status(200).json({success:true,token:"FakeTokenForNow"})).catch(next);
