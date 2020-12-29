@@ -11,7 +11,7 @@ const MovieSchema = new Schema({
 const UserSchema = new Schema({
   username: { type: String, unique: true, required: true},
   password: {type: String, required: true },
-  favourites: [MovieSchema]
+  favourites: {type: [MovieSchema], unique:true}
 });
 
 UserSchema.pre('save', function(next) {

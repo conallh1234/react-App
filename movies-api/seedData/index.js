@@ -8,7 +8,7 @@ const users = [
   {
     'username': 'user2',
     'password': 'test2',
-  }
+  },
 ];
 
 // deletes all user documents in collection and inserts test data

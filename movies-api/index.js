@@ -29,7 +29,9 @@ app.use(bodyParser.urlencoded());
 
 const port = process.env.PORT;
 
-
+if (process.env.SEED_DB) {
+  loadUsers();
+}
 
 app.use(express.static('public'));
 app.use(session({
@@ -47,6 +49,3 @@ app.listen(port, () => {
   console.info(`Server running at ${port}`);
 });
 
-if (process.env.SEED_DB) {
-  loadUsers();
-}
