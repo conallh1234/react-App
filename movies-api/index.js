@@ -7,7 +7,7 @@ import genresRouter from './api/genres';
 import session from 'express-session';
 import passport from './authenticate';
 import './db';
-import {loadUsers} from './seedData'
+import {loadUsers, loadMovies} from './seedData';
 
 
 dotenv.config();
@@ -35,6 +35,7 @@ const port = process.env.PORT;
 
 if (process.env.SEED_DB) {
   loadUsers();
+  loadMovies();
 }
 
 app.use(express.static('public'));
