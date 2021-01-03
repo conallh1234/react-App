@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { query } from 'express';
 import User from './userModel';
 import jwt from 'jsonwebtoken';
 import movieModel from'../movies/movieModel';
@@ -20,12 +20,19 @@ router.get('/:userName/favourites', (req, res, next) => {
 
 // register
 router.post('/', async (req, res, next) => {
+  const passwordPattern = new RegExp("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$");
   if (!req.body.username || !req.body.password) {
     res.status(401).json({
       success: false,
       msg: 'Please pass username and password.',
     });
   }
+ if (passwordPattern.test(req.body.password) == true){
+   res.status(401).json({
+     success: false,
+     msg: 'Please provide a stronger password.',
+   })
+ }
   if (req.query.action === 'register') {
     await User.create(req.body).catch(next);
     res.status(201).json({
@@ -54,6 +61,37 @@ router.post('/', async (req, res, next) => {
     }
 });
 
+//Add a favourite. No Error Handling Yet. Can add duplicates too!
+router.post('/:userName/favourites', async (req, res, next) => {
+  const newFavourite = req.body.id;
+  const userName = req.params.userName;
+  const movie = await movieModel.findByMovieDBId(newFavourite).catch(next);
+  const user = await User.findByUserName(userName).catch(next);
+  //no user matching in users db
+  if (!user) return res.status(401).json({ code: 401, msg: 'Authentication failed. User not found.' });
+  //Only valid ID works i.e id exists in MovieDB
+  if(newFavourite == null || movie == null){
+    res.status(401).json({
+      success: false,
+      msg: 'Please provide valid ID. ' + newFavourite + ' is not a valid movie ID.',
+    });
+  }
+  //Avoid duplicates in favourites, if _id already exists in array dont add again
+  if(user.favourites.includes(movie._id) == true){
+    res.status(401).json({
+      success : false,
+      msg: 'Movie already in favorites'
+    })
+  } 
+  //If error checking passed then update favourites
+  else {
+    await user.favourites.push(movie._id);
+    await user.save(); 
+    res.status(201).json(user);
+  }
+  }
+);
+
 // Update a user
 router.put('/:id',  (req, res, next) => {
     if (req.body._id) delete req.body._id;
@@ -65,15 +103,6 @@ router.put('/:id',  (req, res, next) => {
     .then(user => res.json(200, user)).catch(next);
 });
 
-//Add a favourite. No Error Handling Yet. Can add duplicates too!
-router.post('/:userName/favourites', async (req, res, next) => {
-  const newFavourite = req.body.id;
-  const userName = req.params.userName;
-  const movie = await movieModel.findByMovieDBId(newFavourite);
-  const user = await User.findByUserName(userName);
-  await user.favourites.push(movie._id);
-  await user.save(); 
-  res.status(201).json(user); 
-});
+
 
 export default router;
