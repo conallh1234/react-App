@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch, Link } from "react-router-dom";
 import { PublicPage, Movies, Profile, HomePage } from "./pages";
-import LoginPage from "./loginPage";
-import SignUpPage from "./signUpPage";
+import LoginPage from "../pages/loginPage";
+import SignUpPage from "../pages/signUpPage";
 import PrivateRoute from "./privateRoute";
-import AuthHeader from "./authHeader";
-import AuthProvider from "./authContext";
-import MoviesContext from "./moviesContext";
+import AuthHeader from "../components/authHeader/authHeader";
+import AuthProvider from "../contexts/authContext";
+import MoviesContext from "../contexts/moviesContext";
 
 const App = () => {
   return (
