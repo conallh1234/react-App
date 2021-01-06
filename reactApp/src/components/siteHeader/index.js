@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./siteHeader.css";
+import { withRouter } from "react-router-dom";
+import { AuthContext } from "../../contexts/authContext";
 
-const SiteHeader = () => {
-  return (
+const SiteHeader = (props) => {
+  const context = useContext(AuthContext);
+  const { history } = props;
+
+  return context.isAuthenticated ? (
     <nav className="navbar  navbar-light fixed-top  bg-light ">
       <nav className="navbar-brand text-blue">
         <Link className=" text-blue" to="/">
@@ -22,8 +27,11 @@ const SiteHeader = () => {
         icon={["fas", "video"]}
         size="3x"
       />
+      <nav className="navbar-brand text-blue">
+        <button onClick={() => context.signout()}>Sign out</button>
+      </nav>
       <span className="navbar-text text-dark">
-        For the movie enthusiast !!
+        Hello {context.userName}! Welcome To your Movie API Account.
       </span>
       <FontAwesomeIcon
         className="navbar-text text-dark"
@@ -59,6 +67,25 @@ const SiteHeader = () => {
           </li>
         </ul>
       </nav>
+    </nav>
+  ) : (
+    <nav className="navbar  navbar-light fixed-top  bg-light ">
+      <FontAwesomeIcon
+        className="navbar-text text-dark"
+        icon={["fas", "video"]}
+        size="3x"
+      />
+      <nav className="navbar-brand text-blue">
+        You are not logged in{} <button onClick={() => history.push("/login")}>Login</button>
+      </nav>
+      <span className="navbar-text text-dark">
+        Please Create an account or Log in to Continue 
+      </span>
+      <FontAwesomeIcon
+        className="navbar-text text-dark"
+        icon={["fas", "film"]}
+        size="3x"
+      />
     </nav>
   );
 };

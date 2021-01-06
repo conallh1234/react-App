@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch, Link } from "react-router-dom";
 import { PublicPage, Movies, Profile, HomePage } from "./pages";
 import LoginPage from "../pages/loginPage";
 import SignUpPage from "../pages/signUpPage";
-import PrivateRoute from "./privateRoute";
+import PrivateRoute from "../routes/privateRoute";
 import AuthHeader from "../components/authHeader/authHeader";
 import AuthProvider from "../contexts/authContext";
 import MoviesContext from "../contexts/moviesContext";

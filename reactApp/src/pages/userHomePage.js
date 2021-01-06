@@ -12,8 +12,11 @@ const MovieListPage = () => {
 
   return (
       <PageTemplate 
-        title='No Movies Yet, Log In to View'
-        movies={null}
+        title='No. Movies'
+        movies={movies}
+        action={(movie) => {
+          return <AddToFavoritesButton movie={movie} /> 
+        }}
       />
   );
 };

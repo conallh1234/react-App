@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getMovieCast } from "../../api/tmdb-api";
+import { getMovieCast } from "../../api/movie-api";
 ;
 
 export default ({ movie }) => {

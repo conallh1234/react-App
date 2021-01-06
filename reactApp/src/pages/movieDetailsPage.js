@@ -1,3 +1,4 @@
+import React from "react";
 import PageTemplate from "../components/templateMoviePage";
 import MovieDetails from "../components/movieDetails";
 import { Link, Route, withRouter } from "react-router-dom";
