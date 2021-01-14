@@ -2,6 +2,7 @@ import express, { query } from 'express';
 import User from './userModel';
 import jwt from 'jsonwebtoken';
 import movieModel from'../movies/movieModel';
+import {getMovie} from '../tmdb-api';
 
 const router = express.Router(); // eslint-disable-line
 
@@ -65,10 +66,13 @@ router.post('/', async (req, res, next) => {
 router.post('/:userName/favourites', async (req, res, next) => {
   const newFavourite = req.body.id;
   const userName = req.params.userName;
+  //const movie = await getMovie(newFavourite).catch(next);
   const movie = await movieModel.findByMovieDBId(newFavourite).catch(next);
   const user = await User.findByUserName(userName).catch(next);
+
   //no user matching in users db
   if (!user) return res.status(401).json({ code: 401, msg: 'Authentication failed. User not found.' });
+
   //Only valid ID works i.e id exists in MovieDB
   if(newFavourite == null || movie == null){
     res.status(401).json({
@@ -76,13 +80,15 @@ router.post('/:userName/favourites', async (req, res, next) => {
       msg: 'Please provide valid ID. ' + newFavourite + ' is not a valid movie ID.',
     });
   }
+
   //Avoid duplicates in favourites, if _id already exists in array dont add again
   if(user.favourites.includes(movie._id) == true){
     res.status(401).json({
       success : false,
       msg: 'Movie already in favorites'
     })
-  } 
+  }
+
   //If error checking passed then update favourites
   else {
     await user.favourites.push(movie._id);
@@ -91,6 +97,7 @@ router.post('/:userName/favourites', async (req, res, next) => {
   }
   }
 );
+
 
 // Update a user
 router.put('/:id',  (req, res, next) => {

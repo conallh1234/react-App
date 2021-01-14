@@ -26,4 +26,4 @@ PersonSchema.statics.findPersonByID = function(id){
     return this.findOne({id : id})
 }
 
-export default mongoose.model('People', PersonSchema)
+export default mongoose.model('People', PersonSchema);

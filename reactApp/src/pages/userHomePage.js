@@ -8,6 +8,7 @@ const MovieListPage = () => {
   const movies = context.movies.filter((m) => {  
     return !("favorite" in m);
   });
+  console.log(movies);
 
 
   return (

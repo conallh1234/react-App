@@ -8,12 +8,14 @@ import { AuthContext } from "../../contexts/authContext";
 
 const SiteHeader = (props) => {
   const context = useContext(AuthContext);
-  const { history } = props;
+
+
+
 
   return context.isAuthenticated ? (
     <nav className="navbar  navbar-light fixed-top  bg-light ">
       <nav className="navbar-brand text-blue">
-        <Link className=" text-blue" to="/">
+        <Link className=" text-blue" to="/home">
           Movies
         </Link>
       </nav>
@@ -41,7 +43,7 @@ const SiteHeader = (props) => {
       <nav className="navbar navbar-expand ">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link text-blue" to="/">
+            <Link className="nav-link text-blue" to="/home">
               Home
             </Link>
           </li>
@@ -75,9 +77,13 @@ const SiteHeader = (props) => {
         icon={["fas", "video"]}
         size="3x"
       />
+      <ul>
+      <li>
       <nav className="navbar-brand text-blue">
-        You are not logged in{} <button onClick={() => history.push("/login")}>Login</button>
+        <Link className="nav-link text-green" to="/login">Login</Link>
       </nav>
+      </li>
+      </ul>
       <span className="navbar-text text-dark">
         Please Create an account or Log in to Continue 
       </span>
@@ -90,4 +96,4 @@ const SiteHeader = (props) => {
   );
 };
 
-export default SiteHeader;
+export default withRouter(SiteHeader);

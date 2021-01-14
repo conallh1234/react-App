@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect, useReducer } from "react";
-import {  getMovies, getUpcomingMovies, getTrendingMovies  } from "../api/movie-api";
+import { getMovies, getUpcomingMovies, getTrendingMovies  } from "../api/movie-api";
 
 export const MoviesContext = createContext(null);
 
@@ -78,23 +78,25 @@ const MoviesContextProvider = props => {
   };
 
   useEffect(() => {
-    getMovies().then(result => {
-      console.log(result);
-      dispatch({ type: "load", payload: {result}});
+    getMovies().then(movies => {
+      console.log(movies);
+      dispatch({ type: "load", payload: {movies}});
     });
    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   useEffect(() => {
-    getUpcomingMovies().then((movies) => {
-      dispatch({ type: "load-upcoming", payload: { movies } });
+    getUpcomingMovies().then(movies => {
+      console.log(movies);
+      dispatch({ type: "load-upcoming", payload: {movies} });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    getTrendingMovies().then((movies) => {
-      dispatch({ type: "load-trending", payload: { movies } });
+    getTrendingMovies().then(movies => {
+      console.log(movies);
+      dispatch({ type: "load-trending", payload: {movies} });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -4,10 +4,13 @@ import bodyParser from 'body-parser';
 import moviesRouter from './api/movies';
 import usersRouter from './api/users';
 import genresRouter from './api/genres';
+import peopleRouter from './api/people';
+import trendingRouter from './api/trending';
+import upcomingRouter from './api/upcoming';
 import session from 'express-session';
 import passport from './authenticate';
 import './db';
-import {loadUsers, loadMovies} from './seedData';
+import {loadUsers, loadMovies, loadPeople, loadTrending, loadUpcoming} from './seedData';
 
 
 dotenv.config();
@@ -36,6 +39,9 @@ const port = process.env.PORT;
 if (process.env.SEED_DB) {
   loadUsers();
   loadMovies();
+  loadPeople();
+  loadTrending();
+  loadUpcoming();
 }
 
 app.use(express.static('public'));
@@ -45,8 +51,11 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
+app.use('/api/people', peopleRouter);
+app.use('/api/upcoming', upcomingRouter);
+app.use('/api/trending', trendingRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/genres', genresRouter)
+app.use('/api/genres', genresRouter);
 app.use(errHandler);
 
 

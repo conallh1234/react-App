@@ -1,6 +1,6 @@
 import React, {useContext } from "react";
 import "./reviewForm.css";
-import useForm from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {MoviesContext} from '../../contexts/moviesContext'
 import { withRouter } from "react-router-dom";
 

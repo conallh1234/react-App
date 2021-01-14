@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import PageTemplate from "../components/templatePersonPage";
 import PersonDetails from "../components/personDetails";
 import usePerson from "../hooks/usePerson";

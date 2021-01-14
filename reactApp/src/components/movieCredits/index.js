@@ -10,6 +10,7 @@ export default ({ movie }) => {
     getMovieCast(movie.id).then(cast => {
       setCast(cast);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
