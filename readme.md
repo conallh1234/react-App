@@ -1,3 +1,5 @@
-# Web App Dev 2: Web API Labs
+# Assignment 2 - Movies API.
 
-Practical labs for the WAD2 module, BSc. Applied/Software Systems Dev/Forensics  
+Name: Conall Heffernan
+
+## Please see README.md in 'reactApp' Folder
