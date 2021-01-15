@@ -7,6 +7,7 @@ const UserSchema = new Schema({
   username: { type: String, unique: true, required: true},
   password: {type: String, required: true },
   favourites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movies'}],
+  watchlist: [{type: mongoose.Schema.Types.ObjectId, ref: 'Upcoming'}],
 });
 
 
@@ -30,15 +31,15 @@ UserSchema.pre('save', function(next) {
   }
 });
 
-UserSchema.statics.getUnique = function (favourites, comp) {
-  // store the comparison  values in array
-  const unique =  favourites.map(e => e[comp])
-      // store the indexes of the unique objects
-      .map((e, i, final) => final.indexOf(e) === i && i)
-      // eliminate the false indexes & return unique objects
-      .filter((e) => favourites[e]).map(e => favourites[e]);
-  return unique;
-};
+// UserSchema.statics.getUnique = function (favourites, comp) {
+//   // store the comparison  values in array
+//   const unique =  favourites.map(e => e[comp])
+//       // store the indexes of the unique objects
+//       .map((e, i, final) => final.indexOf(e) === i && i)
+//       // eliminate the false indexes & return unique objects
+//       .filter((e) => favourites[e]).map(e => favourites[e]);
+//   return unique;
+// };
 
 
 UserSchema.statics.findByUserName = function (username) {
@@ -48,7 +49,12 @@ UserSchema.statics.findByUserName = function (username) {
 UserSchema.statics.getFavourites = function(username) {
   const user = this.findByUserName(username)
   return user.favourites
-}
+};
+
+UserSchema.statics.findFavourite = function(username, id) {
+  const user = this.findByUserName(username);
+  return userFavourites.findOne({id : id});
+};
 
 UserSchema.methods.comparePassword = function(passw, cb) {
   bcrypt.compare(passw, this.password, (err, isMatch) => {

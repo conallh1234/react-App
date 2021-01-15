@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import PageTemplate from '../components/templateMovieListPage';
+import PageTemplate from '../components/templateTrendingListPage';
 import {MoviesContext} from '../contexts/moviesContext';
-import {AuthContext} from '../contexts/authContext';
 import AddToFavouritesTrending from '../components/buttons/addToFavoritesTrending';
 
 const TrendingMoviesPage = () => {
@@ -12,17 +11,12 @@ const TrendingMoviesPage = () => {
 //sr added
     //remove the favourites that are in the movies favourites
     favoritesTrending = favoritesTrending.filter( ( m ) => !favoritesDiscover.includes( m ) );
-
-    console.log(AuthContext.userName);
+    const trending = context.trending;
 
   return (
       <PageTemplate 
         title='No. Movies'
-        //movies={movies}
-          movies={favoritesTrending} //show the trending without the favourites from trending and movies
-          action={(movie) => {
-          return <AddToFavouritesTrending movie={movie} />
-        }}
+          movies={trending} //show the trending without the favourites from trending and movies
       />
   );
 };

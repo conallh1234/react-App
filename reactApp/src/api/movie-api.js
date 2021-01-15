@@ -19,13 +19,6 @@ export const signup = (username, password) => {
     ).then(res => res.json())
 };
 
-//get favourites for a user
-export const getFavourites = (username) => {
-    return fetch(`/api/users/${username}/favourites`, {
-        'Authorization': window.localStorage.getItem('token')
-    }
-    ).then(res => res.json());
-};
 
 //add a favourite to a users favourites array
 export const addFavourite = (username, id) => {
@@ -39,8 +32,35 @@ export const addFavourite = (username, id) => {
     ).then(res => res.json());
 };
 
-export const addFavouriteTrending = (username, id) => {
-    return fetch(`/api/users/${username}/favourites`, {
+
+//get favourites for a user
+export const getFavourites = (username) => {
+    return fetch(
+        `/api/users/`+username+`/favourites`, {headers: {
+        'Authorization': window.localStorage.getItem('token')
+        }
+    }
+    )
+    .then(res => res.json());
+};
+
+//remove a favourite from a users array of favourites
+export const removeFromFavourites = (username, id) => {
+    return fetch(
+        `/api/users/${username}/favourites`, {
+            headers: {
+                'Content-type': 'application/json'
+        },
+        method: 'delete',
+        body: JSON.stringify({ id : id })
+    }
+    )
+};
+
+
+//add a movie to a users watchlist array
+export const addWatch = (username, id) => {
+    return fetch(`/api/users/${username}/watchlist`, {
         headers: {
             'Content-type': 'application/json'
         },
@@ -48,7 +68,35 @@ export const addFavouriteTrending = (username, id) => {
         body: JSON.stringify({ id: id })
     }
     ).then(res => res.json());
-}
+};
+
+
+//get watchlist for a user
+export const getWatchList = (username) => {
+    return fetch(
+        `/api/users/`+username+`/watchlist`, {headers: {
+        'Authorization': window.localStorage.getItem('token')
+        }
+    }
+    )
+    .then(res => res.json());
+};
+
+//remove a favourite from a users array of favourites
+export const removeFromWatchList = (username, id) => {
+    return fetch(
+        `/api/users/${username}/watchlist`, {
+            headers: {
+                'Content-type': 'application/json'
+        },
+        method: 'delete',
+        body: JSON.stringify({ id : id })
+    }
+    )
+};
+
+
+
 
 export const getMovies = () => {
     return fetch(

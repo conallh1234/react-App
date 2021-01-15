@@ -1,23 +1,24 @@
 import React, { useContext } from "react";
 import {MoviesContext} from "../../contexts/moviesContext";
 import {AuthContext} from "../../contexts/authContext";
-import { addFavouriteTrending } from "../../api/movie-api";
+import { removeFromWatchList } from "../../api/movie-api";
 
-const AddToFavoritesTrending = ({ movie }) => {
+const RemoveFromWatchList = ({ movie }) => {
   const context = useContext(MoviesContext);
   const context2 = useContext(AuthContext)
 
-  const handleAddToFavorite = e => {
+  const handleRemoveFromWatch = e => {
     e.preventDefault();
+    removeFromWatchList(context2.userName, movie.id)
   };
 
   return (
     <button
       type="button"
       className="btn w-100 btn-primary"
-      onClick={handleAddToFavorite}
+      onClick={handleRemoveFromWatch}
     >
-      Add to Favorites
+      Remove from Watch List
     </button>
   );
 };
@@ -25,4 +26,4 @@ const AddToFavoritesTrending = ({ movie }) => {
 
 
 
-export default AddToFavoritesTrending;
+export default RemoveFromWatchList;

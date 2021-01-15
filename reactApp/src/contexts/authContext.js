@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import { login, signup } from "../api/movie-api";
+import { login, signup, getFavourites, getWatchList } from "../api/movie-api";
 
 export const AuthContext = createContext(null);
 
@@ -32,7 +32,18 @@ const AuthContextProvider = (props) => {
 
   const signout = () => {
     setTimeout(() => setIsAuthenticated(false), 100);
-  }
+  };
+
+  //get favourites for the logged in user
+  const getUserFavourites = async (username) => {
+    const movies = await getFavourites(username);
+    return (movies);
+  };
+
+  const getUserWatchLater = async (username) => {
+    const movies = await getWatchList(username);
+    return (movies);
+  };
 
   return (
     <AuthContext.Provider
@@ -41,8 +52,9 @@ const AuthContextProvider = (props) => {
         authenticate,
         register,
         signout,
-        userName, 
-        authToken
+        userName,
+        getUserFavourites,
+        getUserWatchLater,
       }}
     >
       {props.children}

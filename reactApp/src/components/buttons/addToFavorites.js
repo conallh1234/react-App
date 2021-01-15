@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import {MoviesContext} from "../../contexts/moviesContext";
 import {AuthContext} from "../../contexts/authContext";
-import { addFavourite, getFavourites } from "../../api/movie-api";
+import { addFavourite } from "../../api/movie-api";
 
 const AddToFavoritesButton = ({ movie }) => {
   const context = useContext(MoviesContext);
