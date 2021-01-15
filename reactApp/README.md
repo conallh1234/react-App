@@ -69,19 +69,19 @@ Name: Conall Heffernan
 
 
 ## Routing.
-+ <PrivateRoute exact path="/reviews/form" component={AddMovieReviewPage} /> - route to submit review form
-+ <PrivateRoute path="/reviews/:id" component={MovieReviewPage} /> - route to reviews for a movie
-+ <PrivateRoute exact path="/movies/favorites" component={FavoriteMoviesPage} /> - route to logged in users favourites
-+ <PrivateRoute exact path="/movies/watchlist" component={WatchListPage}/> - route to logged in user's watch list
-+ <PrivateRoute exact path="/movies/trending" component={TrendingMoviesPage} /> - route to trending movies page
-+ <PrivateRoute exact path="/movies/upcoming" component={UpcomingMoviesPage} /> - route to upcoming movies page
-+ <PrivateRoute path="/movies/:id" component={MoviePage} /> - route to a movie details page for movie with the id ':id'
-+ <PrivateRoute path="/people/:id" component={PersonPage} /> - route to a person details page for the person with the id ':id'
-+ <PrivateRoute path="/people" component={PeoplePage} /> - route to popular people page
-+ <PrivateRoute path="/home" component={UserHomePage} /> - route to users home page
-+ <Route exact path="/login" component={LoginPage} /> - route to login page
-+ <Route path="/signup" component={SignUpPage} /> route to sign up page
-+ <Route path="/" component={HomePage} /> - route to welcome page
++ PrivateRoute exact path="/reviews/form" component={AddMovieReviewPage}  - route to submit review form
++ PrivateRoute path="/reviews/:id" component={MovieReviewPage}  - route to reviews for a movie
++ PrivateRoute exact path="/movies/favorites" component={FavoriteMoviesPage} - route to logged in users favourites
++ PrivateRoute exact path="/movies/watchlist" component={WatchListPage} - route to logged in user's watch list
++ PrivateRoute exact path="/movies/trending" component={TrendingMoviesPage}  - route to trending movies page
++ PrivateRoute exact path="/movies/upcoming" component={UpcomingMoviesPage}  - route to upcoming movies page
++ PrivateRoute path="/movies/:id" component={MoviePage}  - route to a movie details page for movie with the id ':id'
++ PrivateRoute path="/people/:id" component={PersonPage}  - route to a person details page for the person with the id ':id'
++ PrivateRoute path="/people" component={PeoplePage}  - route to popular people page
++ PrivateRoute path="/home" component={UserHomePage}  - route to users home page
++ Route exact path="/login" component={LoginPage}  - route to login page
++ Route path="/signup" component={SignUpPage} - route to sign up page
++ Route path="/" component={HomePage}  - route to welcome page
 
 ### Data hyperlinking.
 
