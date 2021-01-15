@@ -1,0 +1,168 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "movieAPI POST",
+    "description" : "A number of post methods useable in the Movies API, outlined below.",
+    "version" : "0.1"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8080"
+  } ],
+  "paths" : {
+    "/api/users" : {
+      "post" : {
+        "description" : "Adding a new user to Movies API",
+        "parameters" : [ {
+          "name" : "action",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "register"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "username" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"username\":\"swagger1\",\n    \"password\":\"swagger1\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Successfully created user 'swagger1'",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "http://localhost:8080"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "http://localhost:8080"
+      } ]
+    },
+    "/api/users/swagger1/watchlist" : {
+      "post" : {
+        "description" : "Adding a new movie to user swagger1's watchlist",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "integer"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"id\":586101\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Successfully added movie",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "http://localhost:8080"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "http://localhost:8080"
+      } ]
+    },
+    "/api/users/swagger1/favourites" : {
+      "post" : {
+        "description" : "Adds a movie to user swagger1's favourites",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "integer"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"id\":400160\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Successfully added a new favourite",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "http://localhost:8080"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "http://localhost:8080"
+      } ]
+    }
+  },
+  "components" : {
+    "securitySchemes" : {
+      "oauth2" : {
+        "type" : "oauth2",
+        "flows" : {
+          "implicit" : {
+            "authorizationUrl" : "http://yourauthurl.com",
+            "scopes" : {
+              "scope_name" : "Enter your scopes here"
+            }
+          }
+        }
+      }
+    }
+  }
+}
