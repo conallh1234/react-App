@@ -25,7 +25,7 @@ const SignUpPage = props => {
 
   return (
     <>
-    
+      <br></br>
       <h2>SignUp page</h2>
       <p>You must register a username and password to log in </p>
       <div className="row">

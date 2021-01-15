@@ -14,7 +14,6 @@ router.get('/', (req, res, next) => {
     User.find().then(users =>  res.status(200).json(users)).catch(next);
 });
 
-
 //get user watchlist
 router.get('/:userName/watchlist', (req, res, next) => {
   const userName = req.params.userName;
@@ -26,17 +25,9 @@ router.get('/:userName/watchlist', (req, res, next) => {
 //get user favorites
 router.get('/:userName/favourites', (req, res, next) => {
   const userName = req.params.userName;
-  if(User.findByUserName(userName) == null){
-    res.status(401).json({
-      success: false,
-      msg: 'User ID is invalid.',
-    });
-  }
-  else{
   User.findByUserName(userName).populate('favourites').then(
     user => res.status(201).json(user.favourites)
   ).catch(next);
-  }
 });
 
 //delete a movie from a users favourites

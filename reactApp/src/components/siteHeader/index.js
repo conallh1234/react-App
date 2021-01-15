@@ -5,12 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./siteHeader.css";
 import { withRouter } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
+import { Button, Menu } from 'semantic-ui-react';
 
 const SiteHeader = (props) => {
   const context = useContext(AuthContext);
-
-
-
 
   return context.isAuthenticated ? (
     <nav className="navbar  navbar-light fixed-top  bg-light ">
@@ -30,10 +28,10 @@ const SiteHeader = (props) => {
         size="3x"
       />
       <nav className="navbar-brand text-blue">
-        <button onClick={() => context.signout()}>Sign out</button>
+        <Button onClick={() => context.signout()}>Sign out</Button>
       </nav>
       <span className="navbar-text text-dark">
-        Hello {context.userName}! Welcome To your Movie API Account.
+        Hello {context.userName}! Welcome back To your Movie API Account.
       </span>
       <FontAwesomeIcon
         className="navbar-text text-dark"
@@ -71,22 +69,24 @@ const SiteHeader = (props) => {
       </nav>
     </nav>
   ) : (
-    <nav className="navbar  navbar-light fixed-top  bg-light ">
+    <nav className="navbar navbar-light fixed-top  bg-light col-12 ">
+      <Menu>    
+        <Menu.Item>
+        <Link className="text-white" to="/login"><Button primary>Log In</Button></Link>
+        </Menu.Item>
+
+        <Menu.Item>
+        <Link to="/signup"><Button>Sign Up</Button></Link>
+        </Menu.Item>
+    </Menu>
+      <span className="navbar-text text-dark ">
+        Please Create an account or Log in to Continue 
+      </span>
       <FontAwesomeIcon
         className="navbar-text text-dark"
         icon={["fas", "video"]}
         size="3x"
       />
-      <ul>
-      <li>
-      <nav className="navbar-brand text-blue">
-        <Link className="nav-link text-green" to="/login">Login</Link>
-      </nav>
-      </li>
-      </ul>
-      <span className="navbar-text text-dark">
-        Please Create an account or Log in to Continue 
-      </span>
       <FontAwesomeIcon
         className="navbar-text text-dark"
         icon={["fas", "film"]}

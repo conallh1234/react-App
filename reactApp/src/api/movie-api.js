@@ -96,8 +96,6 @@ export const removeFromWatchList = (username, id) => {
 };
 
 
-
-
 export const getMovies = () => {
     return fetch(
        '/api/movies',{headers: {
